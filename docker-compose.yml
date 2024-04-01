@@ -17,6 +17,8 @@ services:
       - NODE_OPTIONS="--max-old-space-size=2048"
     depends_on:
       - mongodb
+    volumes:
+      - ./mail.js:/opt/countly/extend/mail.js
 
   countly-frontend:
     user: 0:0
