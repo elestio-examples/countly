@@ -30,7 +30,7 @@ services:
   nginx:
     image: "bitnami/nginx"
     ports:
-      - "172.17.0.1:39973:8080"
+      - "172.17.0.1:30247:8080"
     volumes:
       - "./nginx.server.conf:/opt/bitnami/nginx/conf/server_blocks/countly.conf:ro"
     depends_on:
