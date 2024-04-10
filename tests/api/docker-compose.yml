@@ -3,12 +3,10 @@ version: "3.7"
 services:
   mongodb:
     image: "bitnami/mongodb:latest"
-    volumes:
-      - "./mongodb_data:/bitnami"
 
   countly-api:
     user: 0:0
-    image: "countly/api:${SOFTWARE_VERSION_TAG}"
+    image: "elestio4test/countly-api:latest"
     environment:
       - COUNTLY_PLUGINS=mobile,web,desktop,plugins,density,locale,browser,sources,views,logger,systemlogs,populator,reports,crashes,push,star-rating,slipping-away-users,compare,server-stats,dbviewer,times-of-day,compliance-hub,alerts,onboarding,consolidate,remote-config,hooks,dashboards,sdk,data-manager
       - COUNTLY_CONFIG__MONGODB_HOST=mongodb
@@ -17,12 +15,10 @@ services:
       - NODE_OPTIONS="--max-old-space-size=2048"
     depends_on:
       - mongodb
-    volumes:
-      - ./mail.js:/opt/countly/extend/mail.js
 
   countly-frontend:
     user: 0:0
-    image: "countly/frontend:${SOFTWARE_VERSION_TAG}"
+    image: "countly/frontend:latest"
     environment:
       - COUNTLY_PLUGINS=mobile,web,desktop,plugins,density,locale,browser,sources,views,logger,systemlogs,populator,reports,crashes,push,star-rating,slipping-away-users,compare,server-stats,dbviewer,times-of-day,compliance-hub,alerts,onboarding,consolidate,remote-config,hooks,dashboards,sdk,data-manager
       - COUNTLY_CONFIG__MONGODB_HOST=mongodb
@@ -34,7 +30,7 @@ services:
     ports:
       - "172.17.0.1:30247:8080"
     volumes:
-      - "./nginx.server.conf:/opt/bitnami/nginx/conf/server_blocks/countly.conf:ro"
+      - "${folderName}/nginx.server.conf:/opt/bitnami/nginx/conf/server_blocks/countly.conf:ro"
     depends_on:
       - countly-api
       - countly-frontend
