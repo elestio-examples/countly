@@ -8,6 +8,7 @@ services:
 
   countly-api:
     user: 0:0
+    restart: always
     image: "countly/api:${SOFTWARE_VERSION_TAG}"
     environment:
       - COUNTLY_PLUGINS=mobile,web,desktop,plugins,density,locale,browser,sources,views,logger,systemlogs,populator,reports,crashes,push,star-rating,slipping-away-users,compare,server-stats,dbviewer,times-of-day,compliance-hub,alerts,onboarding,consolidate,remote-config,hooks,dashboards,sdk,data-manager
@@ -22,6 +23,7 @@ services:
 
   countly-frontend:
     user: 0:0
+    restart: always
     image: "countly/frontend:${SOFTWARE_VERSION_TAG}"
     environment:
       - COUNTLY_PLUGINS=mobile,web,desktop,plugins,density,locale,browser,sources,views,logger,systemlogs,populator,reports,crashes,push,star-rating,slipping-away-users,compare,server-stats,dbviewer,times-of-day,compliance-hub,alerts,onboarding,consolidate,remote-config,hooks,dashboards,sdk,data-manager
